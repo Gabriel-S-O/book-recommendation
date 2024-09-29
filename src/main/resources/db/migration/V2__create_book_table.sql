@@ -5,5 +5,6 @@ CREATE TABLE book
     author       VARCHAR(255) NOT NULL,
     isbn         VARCHAR(255) NOT NULL,
     category     VARCHAR(255) NOT NULL,
-    published_at TIMESTAMP    NOT NULL
+    published_at TIMESTAMP    NOT NULL,
+    deleted_at   TIMESTAMP    NULL
 );
