@@ -1,7 +1,6 @@
 package com.elotech.library_management.model.request.book;
 
 import com.elotech.library_management.entity.Book;
-import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
@@ -13,8 +12,9 @@ public record UpdateBookRequest(
         LocalDateTime publishedAt
 ) {
 
-    public static Book toEntity(UpdateBookRequest request) {
+    public static Book toEntity(UpdateBookRequest request, Integer id) {
         final var book = new Book();
+        book.setId(id);
         book.setTitle(request.title());
         book.setAuthor(request.author());
         book.setIsbn(request.isbn());

@@ -1,13 +1,13 @@
 package com.elotech.library_management.model.request.user;
 
 import com.elotech.library_management.entity.User;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
 
 import java.time.LocalDateTime;
 
 public record UpdateUserRequest(
         String name,
-        String email,
+        @Email String email,
         String phone
 ) {
 

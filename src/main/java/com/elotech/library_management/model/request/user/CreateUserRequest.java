@@ -1,13 +1,14 @@
 package com.elotech.library_management.model.request.user;
 
 import com.elotech.library_management.entity.User;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
 public record CreateUserRequest(
         @NotBlank(message = "name is required") String name,
-        @NotBlank(message = "email is required") String email,
+        @NotBlank(message = "email is required") @Email String email,
         @NotBlank(message = "phone is required") String phone
 ) {
 

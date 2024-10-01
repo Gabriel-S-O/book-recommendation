@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -24,13 +22,7 @@ public class UserController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<GetUserResponse> getAll() {
-        return userService.getById(id);
-    }
-
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public GetUserResponse getById(@PathVariable Integer id) {
-        return userService.getById(id);
+        return userService.getAll();
     }
 
     @PostMapping
@@ -39,13 +31,19 @@ public class UserController {
         return userService.create(request);
     }
 
-    @PutMapping
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@Valid @RequestBody UpdateUserRequest request) {
-        userService.update(request);
+    public GetUserResponse getById(@PathVariable Integer id) {
+        return userService.getById(id);
     }
 
-    @DeleteMapping
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@Valid @RequestBody UpdateUserRequest request, @PathVariable Integer id) {
+        userService.update(request, id);
+    }
+
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Integer id) {
         userService.delete(id);

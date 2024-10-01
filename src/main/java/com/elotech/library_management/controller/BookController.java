@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/books")
@@ -24,13 +22,7 @@ public class BookController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<GetBookResponse> getAll() {
-        return bookService.getById(id);
-    }
-
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public GetBookResponse getById(@PathVariable Integer id) {
-        return bookService.getById(id);
+        return bookService.getAll();
     }
 
     @PostMapping
@@ -39,10 +31,16 @@ public class BookController {
         return bookService.create(request);
     }
 
-    @PutMapping
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@Valid @RequestBody UpdateBookRequest request) {
-        bookService.update(request);
+    public GetBookResponse getById(@PathVariable Integer id) {
+        return bookService.getById(id);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@Valid @RequestBody UpdateBookRequest request, @PathVariable Integer id) {
+        bookService.update(request, id);
     }
 
     @DeleteMapping("/{id}")

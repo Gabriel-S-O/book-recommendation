@@ -10,6 +10,6 @@ CREATE TABLE loan
 );
 
 ALTER TABLE loan
-    ADD FOREIGN KEY (user_id) REFERENCES "user" (id);
+    ADD FOREIGN KEY (user_id) REFERENCES users (id);
 ALTER TABLE loan
     ADD FOREIGN KEY (book_id) REFERENCES book (id);
