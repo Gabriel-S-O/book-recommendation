@@ -10,6 +10,5 @@ import java.util.Optional;
 @Repository
 public interface LoanRepository extends JpaRepository<Loan, Integer> {
 
-    Optional<Loan> findByBookIdAndStatus(Integer bookId,
-                                         boolean status);
+    Optional<Loan> findByBookIdAndStatus(Integer bookId, boolean status);
 }

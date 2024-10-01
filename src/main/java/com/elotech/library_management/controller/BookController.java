@@ -1,7 +1,9 @@
 package com.elotech.library_management.controller;
 
+import com.elotech.library_management.model.request.book.BookRecommendationRequest;
 import com.elotech.library_management.model.request.book.CreateBookRequest;
 import com.elotech.library_management.model.request.book.UpdateBookRequest;
+import com.elotech.library_management.model.response.book.BookRecommendationResponse;
 import com.elotech.library_management.model.response.book.CreateBookResponse;
 import com.elotech.library_management.model.response.book.GetBookResponse;
 import com.elotech.library_management.service.BookService;
@@ -47,6 +49,12 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Integer id) {
         bookService.delete(id);
+    }
+
+    @GetMapping("/recommend")
+    @ResponseStatus(HttpStatus.OK)
+    public List<BookRecommendationResponse> getRecomendation(@Valid @RequestBody BookRecommendationRequest request){
+        return bookService.getRecommendation(request);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.elotech.library_management.service;
 
+import com.elotech.library_management.common.configs.BeanUtilsConfig;
 import com.elotech.library_management.entity.User;
 import com.elotech.library_management.model.request.user.CreateUserRequest;
 import com.elotech.library_management.model.request.user.UpdateUserRequest;
@@ -26,7 +27,7 @@ public class UserService {
 
     public void update(UpdateUserRequest request, Integer id) {
         var user = getUserOrThrow(id);
-        BeanUtils.copyProperties(request, user);
+        BeanUtilsConfig.copyNonNullProperties(request, user);
         userRepository.save(user);
     }
 

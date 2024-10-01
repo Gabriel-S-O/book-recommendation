@@ -1,8 +1,11 @@
 package com.elotech.library_management.service;
 
+import com.elotech.library_management.common.configs.BeanUtilsConfig;
 import com.elotech.library_management.entity.Book;
+import com.elotech.library_management.model.request.book.BookRecommendationRequest;
 import com.elotech.library_management.model.request.book.CreateBookRequest;
 import com.elotech.library_management.model.request.book.UpdateBookRequest;
+import com.elotech.library_management.model.response.book.BookRecommendationResponse;
 import com.elotech.library_management.model.response.book.CreateBookResponse;
 import com.elotech.library_management.model.response.book.GetBookResponse;
 import com.elotech.library_management.repository.BookRepository;
@@ -17,16 +20,18 @@ import java.util.List;
 public class BookService {
 
     private final BookRepository bookRepository;
+
     private final CreateBookResponse createBookResponse;
     private final GetBookResponse getBookResponse;
+    private final BookRecommendationResponse bookRecommendationResponse;
 
     public CreateBookResponse create(CreateBookRequest request) {
         return createBookResponse.toPresentation(bookRepository.save(CreateBookRequest.toEntity(request)));
     }
 
-    public void update(UpdateBookRequest request,  Integer id) {
+    public void update(UpdateBookRequest request, Integer id) {
         var book = getBookOrThrow(id);
-        BeanUtils.copyProperties(request, book);
+        BeanUtilsConfig.copyNonNullProperties(request, book);
         bookRepository.save(book);
     }
 
@@ -41,6 +46,13 @@ public class BookService {
     public List<GetBookResponse> getAll() {
         return bookRepository.findAll().stream()
                 .map(getBookResponse::toPresentation)
+                .toList();
+    }
+
+    public List<BookRecommendationResponse> getRecommendation(BookRecommendationRequest request) {
+        var books = bookRepository.findBooksNotLoanedByUserInCategory(request.userId(), request.category());
+        return books.stream()
+                .map(bookRecommendationResponse::toPresentation)
                 .toList();
     }
 

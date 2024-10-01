@@ -4,7 +4,6 @@ import com.elotech.library_management.entity.Book;
 import com.elotech.library_management.entity.Loan;
 import com.elotech.library_management.entity.User;
 import com.elotech.library_management.model.request.loan.CreateLoanRequest;
-import com.elotech.library_management.model.request.loan.UpdateLoanRequest;
 import com.elotech.library_management.repository.BookRepository;
 import com.elotech.library_management.repository.LoanRepository;
 import com.elotech.library_management.repository.UserRepository;

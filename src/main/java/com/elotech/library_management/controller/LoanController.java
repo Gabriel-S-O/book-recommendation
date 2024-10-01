@@ -1,7 +1,6 @@
 package com.elotech.library_management.controller;
 
 import com.elotech.library_management.model.request.loan.CreateLoanRequest;
-import com.elotech.library_management.model.request.loan.UpdateLoanRequest;
 import com.elotech.library_management.service.LoanService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
